@@ -5,6 +5,7 @@ var router = express.Router();
 const UserModel = require('../../models/UserModel');
 
 const md5 = require('md5');
+const fs = require("fs");
 
 router.get('/reg', (req, res) => {
   res.render('auth/reg');
@@ -45,6 +46,16 @@ router.post('/login', async (req, res) => {
 
     req.session.username = data.username;
     req.session._id = data._id;
+
+    const timestamp = new Date().toISOString();
+    const logMessage = `\r\n[${timestamp}] ${username} login in`;
+
+    // Append the log with timestamp
+    fs.appendFile('./log.txt', logMessage, err => {
+      if (err) {
+        console.log(err);
+      }
+    });
 
     res.render('success', { msg: 'Login successful', url: '/account' });
 

@@ -1,6 +1,4 @@
-const express = require('express');
-
-const jwt = require('jsonwebtoken');
+const express = require('express');;
 
 let checkTokenMiddleware = require('../../middlewares/checkTokenMiddleware');
 
