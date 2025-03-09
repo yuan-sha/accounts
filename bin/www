@@ -2,7 +2,6 @@
 //import db function
 const db = require('../db/db');
 
-//invoke the database function"
 db(() => {
   /**
    * Module dependencies.
@@ -41,12 +40,10 @@ db(() => {
     var port = parseInt(val, 10);
 
     if (isNaN(port)) {
-      // named pipe
       return val;
     }
 
     if (port >= 0) {
-      // port number
       return port;
     }
 
@@ -66,7 +63,6 @@ db(() => {
       ? 'Pipe ' + port
       : 'Port ' + port;
 
-    // handle specific listen errors with friendly messages
     switch (error.code) {
       case 'EACCES':
         console.error(bind + ' requires elevated privileges');

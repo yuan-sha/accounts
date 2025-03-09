@@ -19,10 +19,10 @@ router.post('/reg', async (req, res) => {
 
     await UserModel.create(userData);
 
-    res.render('success', { msg: '注册成功', url: '/login' });
+    res.render('success', { msg: 'Registration successful', url: '/login' });
 
   } catch (error) {
-    res.status(500).send('注册失败, 请稍后再试~~');
+    res.status(500).send('Registration failed. Please try again later~~');
   }
 });
 
@@ -40,16 +40,16 @@ router.post('/login', async (req, res) => {
     }).exec();
 
     if (!data) {
-      res.render('warning', {msg: '账号或密码错误~~', url: '/login'});
+      res.render('warning', {msg: 'Incorrect account or password~~', url: '/login'});
     }
 
     req.session.username = data.username;
     req.session._id = data._id;
 
-    res.render('success', { msg: '登录成功', url: '/account' });
+    res.render('success', { msg: 'Login successful', url: '/account' });
 
   } catch (error) {
-    res.render('warning', {msg: '登录失败，请稍后再试~~', url: '/login'});
+    res.render('warning', {msg: 'Login failed. Please try again later~~', url: '/login'});
   }
 });
 
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   //销毁 session
   req.session.destroy(() => {
-    res.render('success', {msg: '退出成功', url: '/login'});
+    res.render('success', {msg: 'Logout successful', url: '/login'});
   })
 });
 

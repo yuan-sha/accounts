@@ -16,14 +16,14 @@ router.get('/account', checkTokenMiddleware, async (req, res) => {
 
     res.json({
       code: '0000',
-      msg: '读取成功',
+      msg: 'Successfully loaded',
       data: data
     });
 
   } catch (error) {
     res.json({
       code: '1001',
-      msg: '读取失败~~',
+      msg: 'Data retrieval failed~~',
       data: null,
       error: error.message
     });
@@ -40,14 +40,14 @@ router.post('/account', checkTokenMiddleware, async (req, res) => {
 
     res.json({
       code: '0000',
-      msg: '创建成功',
+      msg: 'Successfully created',
       data: data
     });
 
   } catch (error) {
     res.json({
       code: '1002',
-      msg: '创建失败~~',
+      msg: 'Failed to create~~',
       data: null,
       error: error.message
     });
@@ -64,21 +64,21 @@ router.delete('/account/:id', checkTokenMiddleware, async (req, res) => {
     if (deleteResult.deletedCount === 0) {
       return res.json({
         code: '1003',
-        msg: '删除账单失败，可能该账单不存在',
+        msg: 'Failed to delete the account. It may not exist',
         data: null
       });
     }
 
     res.json({
       code: '0000',
-      msg: '删除成功',
+      msg: 'Deleted successfully',
       data: {}
     });
 
   } catch (error) {
     res.json({
       code: '5000',
-      msg: '服务器错误',
+      msg: 'Internal server error',
       data: null,
       error: error.message
     });
@@ -95,21 +95,21 @@ router.get('/account/:id', checkTokenMiddleware, async (req, res) => {
     if (!data) {
       return res.json({
         code: '1004',
-        msg: '读取失败~~',
+        msg: 'Data retrieval failed~~',
         data: null
       });
     }
 
     res.json({
       code: '0000',
-      msg: '读取成功',
+      msg: 'Successfully loaded',
       data: data
     });
 
   } catch (error) {
     res.json({
       code: '5000',
-      msg: '服务器错误',
+      msg: 'Internal server error',
       data: null,
       error: error.message
     });
@@ -126,7 +126,7 @@ router.patch('/account/:id', checkTokenMiddleware, async (req, res) => {
     if (updateResult.modifiedCount === 0 && updateResult.matchedCount===0) {
       return res.json({
         code: '1005',
-        msg: '更新失败~~',
+        msg: 'Update failed~~',
         data: null
       });
     }
@@ -136,21 +136,21 @@ router.patch('/account/:id', checkTokenMiddleware, async (req, res) => {
     if (!updatedData) {
       return res.json({
         code: '1004',
-        msg: '读取失败~~',
+        msg: 'Data retrieval failed~~',
         data: null
       });
     }
 
     res.json({
       code: '0000',
-      msg: '更新成功',
+      msg: 'Updated successfully',
       data: updatedData
     });
 
   } catch (error) {
     res.json({
       code: '5000',
-      msg: '服务器错误',
+      msg: 'Internal server error',
       data: null,
       error: error.message
     });

@@ -1,10 +1,9 @@
-//Import jwt
 const jwt = require('jsonwebtoken');
-// Read configuration settings
+
 const {secret} = require('../config/config');
-// Declare middleware
+
 module.exports = (req, res, next) => {
-  //Get token
+
   let token = req.get('token');
   if (!token) {
     return res.json({
@@ -13,7 +12,7 @@ module.exports = (req, res, next) => {
       data: null
     })
   }
-  //Verify token
+
   jwt.verify(token, secret, (err, data) => {
     if (err) {
       return res.json({
@@ -22,9 +21,9 @@ module.exports = (req, res, next) => {
         data: null
       })
     }
-    //Save user information
+
     req.user = data; // req.session  req.body
-    //If the token verification is successful
+
     next();
   });
 }

@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
     if (!data) {
       return res.json({
         code: '2002',
-        msg: '用户名或密码错误~~~',
+        msg: 'Incorrect username or password~~~',
         data: null
       });
     }
@@ -33,19 +33,19 @@ router.post('/login', async (req, res) => {
           _id: data._id
         },
         secret,
-        { expiresIn: '7d' } // 7 天过期
+        { expiresIn: '7d' }
     );
 
     res.json({
       code: '0000',
-      msg: '登录成功',
+      msg: 'Login successful',
       data: token
     });
 
   } catch (error) {
     res.json({
       code: '2001',
-      msg: '数据库读取失败~~~',
+      msg: 'Database read error~~~',
       data: null,
       error: error.message
     });
@@ -57,12 +57,12 @@ router.post('/logout', async (req, res) => {
   try {
     await new Promise((resolve) => req.session.destroy(resolve));
 
-    res.render('success', { msg: '退出成功', url: '/login' });
+    res.render('success', { msg: 'Logout successful', url: '/login' });
 
   } catch (error) {
     res.json({
       code: '5000',
-      msg: '退出失败~~',
+      msg: 'Logout failed~~',
       data: null,
       error: error.message
     });

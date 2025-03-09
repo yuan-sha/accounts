@@ -29,14 +29,14 @@
         <div class="row text-right">
           <div class="col-xs-12" style="padding-top: 20px">
             <form method="post" action="/logout">
-              <button class="btn btn-danger">退出</button>
+              <button class="btn btn-danger">Logout</button>
             </form>
           </div>
         </div>
         <hr>
         <div class="row">
-          <h2 class="col-xs-6">记账本</h2>
-          <h2 class="col-xs-6 text-right"><a href="/account/create" class="btn btn-primary">添加账单</a></h2>
+          <h2 class="col-xs-6">Ledger</h2>
+          <h2 class="col-xs-6 text-right"><a href="/account/create" class="btn btn-primary">Add Record</a></h2>
         </div>
         <hr />
         <div class="accounts">
@@ -51,11 +51,11 @@
                 </div>
                 <div class="col-xs-2 text-center">
                   <span class="label <%= item.type=== -1 ? 'label-warning' : 'label-success'  %>">
-                    <%= item.type===-1 ? '支出' : '收入' %>
+                    <%= item.type===-1 ? 'Expense' : 'Income' %>
                   </span>
                 </div>
                 <div class="col-xs-2 text-right">
-                  <%= item.account %> 元
+                  $ <%= item.account %>
                 </div>
                 <div class="col-xs-2 text-right">
                   <a class="delBtn" href="/account/<%= item._id %>">
@@ -72,16 +72,14 @@
   </div>
 </body>
 <script>
-  //获取所有的 delBtn
   let delBtns = document.querySelectorAll('.delBtn');
 
   //绑定事件
   delBtns.forEach(item => {
     item.addEventListener('click', function (e) {
-      if (confirm('您确定要删除该文档么??')) {
+      if (confirm('Are you sure you want to delete this record?')) {
         return true;
       } else {
-        //阻止默认行为
         e.preventDefault();
       }
     });

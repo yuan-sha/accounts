@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.get('/account', checkLoginMiddleware, function(req, res, next) {
   AccountModel.find().sort({time: -1}).exec((err, data) => {
     if(err){
-      res.status(500).send('读取失败~~~');
+      res.status(500).send('Read failed~~~');
       return;
     }
     //响应成功的提示
@@ -32,10 +32,10 @@ router.post('/account',checkLoginMiddleware, (req, res) => {
     time: moment(req.body.time).toDate()
   }, (err, data) => {
     if(err){
-      res.status(500).send('插入失败~~');
+      res.status(500).send('Failed to insert.~~');
       return
     }
-    res.render('success', {msg: '添加成功哦~~~', url: '/account'});
+    res.render('success', {msg: 'Added successfully~~~', url: '/account'});
   })
 });
 
@@ -43,10 +43,10 @@ router.get('/account/:id', checkLoginMiddleware, (req, res) => {
   let id = req.params.id;
   AccountModel.deleteOne({_id: id}, (err, data) => {
     if(err) {
-      res.status(500).send('删除失败~');
+      res.status(500).send('Deletion failed~');
       return;
     }
-    res.render('success', {msg: '删除成功~~~', url: '/account'});
+    res.render('success', {msg: 'Deleted successfully~~~', url: '/account'});
   })
 });
 
