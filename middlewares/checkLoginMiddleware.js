@@ -1,6 +1,5 @@
-//检测登录的中间件
+// Middleware to check login status
 module.exports = (req, res, next) => {
-  //判断
   if(!req.session.username){
     return res.redirect('/login');
   }

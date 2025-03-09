@@ -1,39 +1,40 @@
 /**
- * 
- * @param {*} success 数据库连接成功的回调
- * @param {*} error 数据库连接失败的回调
+ *
+ * @param {*} success Callback function for a successful database connection
+ * @param {*} error Callback function for a failed database connection
  */
 module.exports = function (success, error) {
-  //判断 error 为其设置默认值
+  // Check if error is undefined and set a default value
   if(typeof error !== 'function'){
     error = () => {
       console.log('连接失败~~~');
     }
   }
-  //1. 安装 mongoose
-  //2. 导入 mongoose
+  //1. install mongoose
+  //2. import mongoose
   const mongoose = require('mongoose');
-  //导入 配置文件
+  //import config file
   const {DBHOST, DBPORT, DBNAME} = require('../config/config.js');
 
-  //设置 strictQuery 为 true
+  //set strictQuery = true
   mongoose.set('strictQuery', true);
 
-  //3. 连接 mongodb 服务                        数据库的名称
+  //3. connect mongodb                       database information
   mongoose.connect(`mongodb://${DBHOST}:${DBPORT}/${DBNAME}`);
 
-  //4. 设置回调
-  // 设置连接成功的回调  once 一次   事件回调函数只执行一次
+  // 4. Set callback functions
+  // Set the callback for a successful connection
+  // `once` means the event callback function will only execute once
   mongoose.connection.once('open', () => {
     success();
   });
 
-  // 设置连接错误的回调
+  // Set the callback for a connection error
   mongoose.connection.on('error', () => {
     error();
   });
 
-  //设置连接关闭的回调
+  // Set the callback for connection closure
   mongoose.connection.on('close', () => {
     console.log('连接关闭');
   });

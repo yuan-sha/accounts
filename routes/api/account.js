@@ -1,12 +1,12 @@
-//导入 express
+//Import express
 const express = require('express');
-//导入 jwt
+//Import jwt
 const jwt = require('jsonwebtoken');
-//导入中间件
+//Import middleware
 let checkTokenMiddleware = require('../../middlewares/checkTokenMiddleware');
 
 const router = express.Router();
-//导入 moment
+//Import moment
 const moment = require('moment');
 const AccountModel = require('../../models/AccountModel');
 

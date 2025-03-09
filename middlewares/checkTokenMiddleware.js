@@ -1,12 +1,11 @@
-//导入 jwt
+//Import jwt
 const jwt = require('jsonwebtoken');
-//读取配置项
+// Read configuration settings
 const {secret} = require('../config/config');
-//声明中间件
+// Declare middleware
 module.exports = (req, res, next) => {
-  //获取 token
+  //Get token
   let token = req.get('token');
-  //判断
   if (!token) {
     return res.json({
       code: '2003',
@@ -14,9 +13,8 @@ module.exports = (req, res, next) => {
       data: null
     })
   }
-  //校验 token
+  //Verify token
   jwt.verify(token, secret, (err, data) => {
-    //检测 token 是否正确
     if (err) {
       return res.json({
         code: '2004',
@@ -24,9 +22,9 @@ module.exports = (req, res, next) => {
         data: null
       })
     }
-    //保存用户的信息
+    //Save user information
     req.user = data; // req.session  req.body
-    //如果 token 校验成功
+    //If the token verification is successful
     next();
   });
 }
