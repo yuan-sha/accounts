@@ -17,7 +17,11 @@ module.exports = function (success, error) {
   mongoose.connect(`mongodb://${DBHOST}:${DBPORT}/${DBNAME}`);
 
   mongoose.connection.once('open', () => {
-    fs.writeFileSync('./log.txt', "Just a test")
+    fs.appendFile('./log.txt', "\r\nJust a test",err=>{
+      if(err){
+        console.log(err);
+      }
+    })
     success();
   });
 
