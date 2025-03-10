@@ -1,4 +1,5 @@
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -14,6 +15,9 @@ const MongoStore = require('connect-mongo');
 const {DBHOST, DBPORT, DBNAME} = require('./config/config');
 
 var app = express();
+
+app.use(cors());
+
 // Set up session middleware"
 app.use(session({
   name: 'sid',   // Set the cookie name, default is: connect.sid"

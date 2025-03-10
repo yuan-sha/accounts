@@ -8,7 +8,7 @@ const moment = require('moment');
 
 const AccountModel = require('../../models/AccountModel');
 
-router.get('/account', checkTokenMiddleware, async (req, res) => {
+router.get('/account', async (req, res) => {
   try {
     const data = await AccountModel.find().sort({ time: -1 }).exec();
 
@@ -29,7 +29,7 @@ router.get('/account', checkTokenMiddleware, async (req, res) => {
 });
 
 
-router.post('/account', checkTokenMiddleware, async (req, res) => {
+router.post('/account', async (req, res) => {
   try {
     const data = await AccountModel.create({
       ...req.body,
@@ -53,7 +53,7 @@ router.post('/account', checkTokenMiddleware, async (req, res) => {
 });
 
 
-router.delete('/account/:id', checkTokenMiddleware, async (req, res) => {
+router.delete('/account/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -84,7 +84,7 @@ router.delete('/account/:id', checkTokenMiddleware, async (req, res) => {
 });
 
 
-router.get('/account/:id', checkTokenMiddleware, async (req, res) => {
+router.get('/account/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -115,7 +115,7 @@ router.get('/account/:id', checkTokenMiddleware, async (req, res) => {
 });
 
 
-router.patch('/account/:id', checkTokenMiddleware, async (req, res) => {
+router.patch('/account/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
